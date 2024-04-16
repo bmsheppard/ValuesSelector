@@ -34,11 +34,12 @@ function App() {
   const [canUndo, setCanUndo] = useState(true);
   const [dark, setDark] = useState(false);
   if (dark) { 
-    document.body.style.background = "var(--black)";
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', 'var(--black');
+    console.log('to light')
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", "#3C4353");
+    document.body.style.backgroundColor = "#3C4353"
   } else {
-    document.body.style.backgroundColor = "var(--white)";
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', 'var(--white');
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", "#FFF4E9");
+    document.body.style.backgroundColor = "#FFF4E9"
   }
 
   const refreshCurrentChoices = () => {
@@ -95,9 +96,6 @@ function App() {
         {dark ? "Light Mode" : "Dark Mode"}
       </div>
       <div className={dark ? "App-Dark" : "App"}>
-        <div className={dark ? "Dark-Button" : "Light-Button"} onClick={() => setDark(!dark)}>
-          {dark ? "Light Mode" : "Dark Mode"}
-        </div>
         <div className="Values-Wrapper">
           <ol className="Values-List">
             {
