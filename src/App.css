@@ -1,15 +1,17 @@
 :root {
+  --black: #3C4353;
   --gray: #545E75;
   --gray-clear: #545E7511;
   --white: #FFF4E9;
+  --white-clear: #FFF4E911;
   --red: #C03221;
+  --light-red: #F26157;
   --red-clear: #C0322111;
   --green: #3F826D;
   --green-clear: #3F826D22;
   --yellow: #F3B700;
   --yellow-clear: #F3B70011;
 }
-
 body {
   font-family: "Quicksand", sans-serif;
   font-optical-sizing: auto;
@@ -17,12 +19,19 @@ body {
   font-style: normal;
   background-color: var(--white);
 }
-
 .App {
   width: 100vw;
   height: 100vh;
   align-content: center;
   background-color: var(--white);
+  color: var(--gray);
+}
+.App-Dark {
+  width: 100vw;
+  height: 100vh;
+  align-content: center;
+  background-color: var(--black);
+  color: var(--white);
 }
 .Progress-Wrapper {
   width: 80vw;
@@ -56,6 +65,18 @@ body {
   align-content: center;
   border: 2px solid var(--gray);
   color: var(--gray);
+  opacity: 50%;
+  border-radius: 20px;
+  user-select: none
+}
+.Round-Dark {
+  width: 40px;
+  height: 40px;
+  margin: 10px;
+  text-align: center;
+  align-content: center;
+  border: 2px solid var(--white);
+  color: var(--white);
   opacity: 50%;
   border-radius: 20px;
   user-select: none
@@ -94,6 +115,23 @@ body {
 .Card:hover {
   background-color: var(--gray-clear)
 }
+.Card-Dark {
+  width: 270px;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid var(--white);
+  color: var(--white);
+  cursor: pointer;
+  border-radius: 20px;
+  user-select: none;
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+.Card-Dark:hover {
+  background-color: var(--white-clear)
+}
 .Actions-Container {
   display: flex;
   flex-direction: row;
@@ -114,6 +152,22 @@ body {
 .Undo-Button:hover {
   background-color: var(--red-clear);
 }
+.Undo-Button-Dark {
+  width: 80px;
+  height: 80px;
+  margin: 30px;
+  text-align: center;
+  align-content: center;
+  border: 2px solid var(--light-red);
+  color: var(--light-red);
+  cursor: pointer;
+  border-radius: 20px;
+  user-select: none
+}
+.Undo-Button-Dark:hover {
+  background-color: var(--red-clear);
+}
+
 .Refresh-Button {
   width: 80px;
   height: 80px;
@@ -147,11 +201,25 @@ body {
   animation-name: fade-in;
   animation-duration: 0.5s;
 }
+.Help-Text-Dark {
+  display: flex;
+  justify-content: center;  
+  animation-name: fade-in;
+  animation-duration: 0.5s;
+  animation-direction: reverse;
+}
 
-ol li { 
+.List { 
   animation-name: fade-in; 
-  animation-duration: 4s; 
-  animation-direction: alternate;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+} 
+
+.List-Dark { 
+  animation-name: fade-in; 
+  animation-duration: 2s;
+  animation-direction: reverse;
+  animation-fill-mode: backwards;
 } 
 
 ol {
@@ -194,10 +262,9 @@ ol li:nth-child(7) {
   } 
 
   to { 
-    color: var(--gray);
+    color: var(--black);
   } 
 } 
-
 @keyframes slide-in { 
   from { 
     margin-right: 100px

@@ -7,6 +7,8 @@ var totalValuesInRound: number = values.length;
 var nextValues: string[] = [];
 var unselectedValues: string[] = [];
 var round: number = 1;
+var dark: boolean = true;
+if (dark) { document.body.style.backgroundColor = "var(--black)" }
 
 const retrieveValues = () => {
   for (let i = currentValues.length - 1; i > 0; i--) {
@@ -82,13 +84,13 @@ function App() {
   var percentageDone = 1 - (currentValues.length / totalValuesInRound);
   if (foundValues) {
     return (
-      <div className="App">
+      <div className={dark ? "App-Dark" : "App"}>
         <div className="Values-Wrapper">
           <ol className="Values-List">
             {
               nextValues.map((value) => {
                 return (
-                  <li key="value">{value}</li>
+                  <li className={dark ? "List-Dark" : "List"} key="value">{value}</li>
                 )
               })
             }
@@ -98,14 +100,28 @@ function App() {
     );
   }
   return (
-    <div className="App">
+    <div className={dark ? "App-Dark" : "App"}>
       <div className="Progress-Wrapper">
         <div className="Progress-Container">
-          <div className={round > 1 ? "Round-Complete" : "Round"} style={{ opacity: round >= 1 ? "100%" : "50%"}}>1</div>
-          <div className={round > 2 ? "Round-Complete" : "Round"} style={{ opacity: round >= 2 ? "100%" : "50%"}}>2</div>
-          <div className={round > 3 ? "Round-Complete" : "Round"} style={{ opacity: round >= 3 ? "100%" : "50%"}}>3</div>
-          <div className={round > 4 ? "Round-Complete" : "Round"} style={{ opacity: round >= 4 ? "100%" : "50%"}}>4</div>
-          <div className={round > 5 ? "Round-Complete" : "Round"} style={{ opacity: round >= 5 ? "100%" : "50%"}}>5</div>
+          {
+            dark ?
+            <>
+            <div className={round > 1 ? "Round-Complete" : "Round-Dark"} style={{ opacity: round >= 1 ? "100%" : "50%"}}>1</div>
+            <div className={round > 2 ? "Round-Complete" : "Round-Dark"} style={{ opacity: round >= 2 ? "100%" : "50%"}}>2</div>
+            <div className={round > 3 ? "Round-Complete" : "Round-Dark"} style={{ opacity: round >= 3 ? "100%" : "50%"}}>3</div>
+            <div className={round > 4 ? "Round-Complete" : "Round-Dark"} style={{ opacity: round >= 4 ? "100%" : "50%"}}>4</div>
+            <div className={round > 5 ? "Round-Complete" : "Round-Dark"} style={{ opacity: round >= 5 ? "100%" : "50%"}}>5</div>
+            </>
+            :
+            <>
+            <div className={round > 1 ? "Round-Complete" : "Round"} style={{ opacity: round >= 1 ? "100%" : "50%"}}>1</div>
+            <div className={round > 2 ? "Round-Complete" : "Round"} style={{ opacity: round >= 2 ? "100%" : "50%"}}>2</div>
+            <div className={round > 3 ? "Round-Complete" : "Round"} style={{ opacity: round >= 3 ? "100%" : "50%"}}>3</div>
+            <div className={round > 4 ? "Round-Complete" : "Round"} style={{ opacity: round >= 4 ? "100%" : "50%"}}>4</div>
+            <div className={round > 5 ? "Round-Complete" : "Round"} style={{ opacity: round >= 5 ? "100%" : "50%"}}>5</div>
+            </>
+          }
+
         </div>
         <div className="Progress-Bar">
           <div className="Inner-Bar" style={{width: `${percentageDone*100}%`}}></div>
@@ -116,7 +132,7 @@ function App() {
           currentChoices.map((value: any) => {
             return (
               <div
-                className="Card"
+                className={dark ? "Card-Dark" : "Card"}
                 onClick={() => updateSelections(value)}
                 key={value}
               >
@@ -127,13 +143,13 @@ function App() {
         }
       </div>
       <div className="Actions-Container">
-        <div className="Undo-Button" onClick={undoSelection}>Undo</div>
+        <div className={dark ? "Undo-Button-Dark" : "Undo-Button"} onClick={undoSelection}>Undo</div>
         <div className="Refresh-Button" onClick={refreshCurrentChoices}>Refresh</div>
       </div>
       {
         !canUndo ?
-        <p className="Help-Text">Cannot undo anymore</p> :
-        <p style={{color: "var(--white)"}}>a</p>
+        <p className={dark ? "Help-Text-Dark" : "Help-Text"}>Cannot undo anymore</p> :
+        <p style={dark ? {color: "var(--black)"} : {color: "var(--white)"}}>a</p>
       }
     </div>
   );
