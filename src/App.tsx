@@ -7,8 +7,6 @@ var totalValuesInRound: number = values.length;
 var nextValues: string[] = [];
 var unselectedValues: string[] = [];
 var round: number = 1;
-var dark: boolean = true;
-if (dark) { document.body.style.backgroundColor = "var(--black)" }
 
 const retrieveValues = () => {
   for (let i = currentValues.length - 1; i > 0; i--) {
@@ -34,6 +32,8 @@ function App() {
   const [currentChoices, setCurrentChoices] = useState(initialValues);
   const [foundValues, setFoundValues] = useState(false);
   const [canUndo, setCanUndo] = useState(true);
+  const [dark, setDark] = useState(false);
+  if (dark) { document.body.style.backgroundColor = "var(--black)" }
 
   const refreshCurrentChoices = () => {
     currentValues.push(currentChoices[0], currentChoices[1]);
@@ -85,6 +85,9 @@ function App() {
   if (foundValues) {
     return (
       <div className={dark ? "App-Dark" : "App"}>
+        <div className={dark ? "Dark-Button" : "Light-Button"} onClick={() => setDark(!dark)}>
+          {dark ? "Light Mode" : "Dark Mode"}
+        </div>
         <div className="Values-Wrapper">
           <ol className="Values-List">
             {
@@ -101,6 +104,9 @@ function App() {
   }
   return (
     <div className={dark ? "App-Dark" : "App"}>
+      <div className={dark ? "Dark-Button" : "Light-Button"} onClick={() => setDark(!dark)}>
+        {dark ? "Light Mode" : "Dark Mode"}
+      </div>
       <div className="Progress-Wrapper">
         <div className="Progress-Container">
           {

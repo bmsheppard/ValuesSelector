@@ -22,6 +22,7 @@ body {
 .App {
   width: 100vw;
   height: 100vh;
+  min-height: 870px;
   align-content: center;
   background-color: var(--white);
   color: var(--gray);
@@ -29,9 +30,44 @@ body {
 .App-Dark {
   width: 100vw;
   height: 100vh;
+  min-height: 870px;
   align-content: center;
   background-color: var(--black);
   color: var(--white);
+}
+.Dark-Button {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  display: flex;
+  width: 100px;
+  height: 40px;
+  border: 2px solid var(--white);
+  border-radius: 12px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  user-select: none
+}
+.Dark-Button:hover {
+  background-color: var(--white-clear);
+}
+.Light-Button {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  display: flex;
+  width: 100px;
+  height: 40px;
+  border: 2px solid var(--gray);
+  border-radius: 12px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  user-select: none
+}
+.Light-Button:hover {
+  background-color: var(--gray-clear);
 }
 .Progress-Wrapper {
   width: 80vw;
