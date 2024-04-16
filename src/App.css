@@ -75,10 +75,11 @@ body {
 .Cards-Container {
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 .Card {
-  width: 300px;
-  height: 200px;
+  width: 270px;
+  height: 180px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -88,6 +89,7 @@ body {
   border-radius: 20px;
   user-select: none;
   font-size: 30px;
+  margin-bottom: 30px;
 }
 .Card:hover {
   background-color: var(--gray-clear)
@@ -139,11 +141,17 @@ body {
   color: var(--white);
   font-size: 30px;
 }
+.Help-Text {
+  display: flex;
+  justify-content: center;  
+  animation-name: fade-in;
+  animation-duration: 0.5s;
+}
 
 ol li { 
   animation-name: fade-in; 
   animation-duration: 4s; 
-  animation-fill-mode: forwards; 
+  animation-direction: alternate;
 } 
 
 ol {

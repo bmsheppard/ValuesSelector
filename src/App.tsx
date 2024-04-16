@@ -31,22 +31,23 @@ let initialValues = retrieveValues()
 function App() {
   const [currentChoices, setCurrentChoices] = useState(initialValues);
   const [foundValues, setFoundValues] = useState(false);
+  const [canUndo, setCanUndo] = useState(true);
 
   const refreshCurrentChoices = () => {
     currentValues.push(currentChoices[0], currentChoices[1]);
     let nextSelection = retrieveValues();
     setCurrentChoices(nextSelection);
+    setCanUndo(true);
     return
   }
 
   const undoSelection = () => {
     if (nextValues.length === 0) {
-      console.log('cannot undo');
+      setCanUndo(false);
       return
     }
     let prevSelected: string = nextValues.pop() as string
     let prevUnselected: string = unselectedValues.pop() as string
-    console.log(currentValues.length);
     currentValues.push(currentChoices[0], currentChoices[1], prevSelected, prevUnselected);
     let nextSelection = retrieveValues();
     setCurrentChoices(nextSelection);
@@ -55,6 +56,7 @@ function App() {
 
   const updateSelections = (selectedValue: string) => {
     nextValues.push(selectedValue);
+    
     if (selectedValue === currentChoices[0]) {
       unselectedValues.push(currentChoices[1])
     } else {
@@ -74,9 +76,9 @@ function App() {
     }
     let nextSelection = retrieveValues(); 
     setCurrentChoices(nextSelection);
+    setCanUndo(true);
     return
   }
-  console.log(currentValues.length);
   var percentageDone = 1 - (currentValues.length / totalValuesInRound);
   if (foundValues) {
     return (
@@ -128,6 +130,11 @@ function App() {
         <div className="Undo-Button" onClick={undoSelection}>Undo</div>
         <div className="Refresh-Button" onClick={refreshCurrentChoices}>Refresh</div>
       </div>
+      {
+        !canUndo ?
+        <p className="Help-Text">Cannot undo anymore</p> :
+        <p style={{color: "var(--white)"}}>a</p>
+      }
     </div>
   );
 }
