@@ -46,8 +46,9 @@ body {
   border-radius: 12px;
   justify-content: center;
   align-items: center;
+  color: var(--white);
   cursor: pointer;
-  user-select: none
+  user-select: none;
 }
 .Dark-Button:hover {
   background-color: var(--white-clear);
@@ -63,6 +64,7 @@ body {
   border-radius: 12px;
   justify-content: center;
   align-items: center;
+  color: var(--gray);
   cursor: pointer;
   user-select: none
 }

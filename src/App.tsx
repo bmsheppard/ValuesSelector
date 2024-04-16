@@ -33,7 +33,13 @@ function App() {
   const [foundValues, setFoundValues] = useState(false);
   const [canUndo, setCanUndo] = useState(true);
   const [dark, setDark] = useState(false);
-  if (dark) { document.body.style.backgroundColor = "var(--black)" }
+  if (dark) { 
+    document.body.style.background = "var(--black)";
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', 'var(--black');
+  } else {
+    document.body.style.backgroundColor = "var(--white)";
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', 'var(--white');
+  }
 
   const refreshCurrentChoices = () => {
     currentValues.push(currentChoices[0], currentChoices[1]);
@@ -84,6 +90,10 @@ function App() {
   var percentageDone = 1 - (currentValues.length / totalValuesInRound);
   if (foundValues) {
     return (
+      <>
+      <div className={dark ? "Dark-Button" : "Light-Button"} onClick={() => setDark(!dark)}>
+        {dark ? "Light Mode" : "Dark Mode"}
+      </div>
       <div className={dark ? "App-Dark" : "App"}>
         <div className={dark ? "Dark-Button" : "Light-Button"} onClick={() => setDark(!dark)}>
           {dark ? "Light Mode" : "Dark Mode"}
@@ -100,13 +110,15 @@ function App() {
           </ol>
         </div>
       </div>
+      </>
     );
   }
   return (
+    <>
+    <div className={dark ? "Dark-Button" : "Light-Button"} onClick={() => setDark(!dark)}>
+      {dark ? "Light Mode" : "Dark Mode"}
+    </div>
     <div className={dark ? "App-Dark" : "App"}>
-      <div className={dark ? "Dark-Button" : "Light-Button"} onClick={() => setDark(!dark)}>
-        {dark ? "Light Mode" : "Dark Mode"}
-      </div>
       <div className="Progress-Wrapper">
         <div className="Progress-Container">
           {
@@ -158,6 +170,7 @@ function App() {
         <p style={dark ? {color: "var(--black)"} : {color: "var(--white)"}}>a</p>
       }
     </div>
+    </>
   );
 }
 
