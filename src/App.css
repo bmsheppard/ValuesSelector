@@ -1,7 +1,75 @@
+:root {
+  --gray: #545E75;
+  --gray-clear: #545E7511;
+  --white: #FFF4E9;
+  --red: #C03221;
+  --red-clear: #C0322111;
+  --green: #3F826D;
+  --green-clear: #3F826D22;
+  --yellow: #F3B700;
+  --yellow-clear: #F3B70011;
+}
+
+body {
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
 .App {
   width: 100vw;
   height: 100vh;
   align-content: center;
+  background-color: var(--white);
+}
+.Progress-Wrapper {
+  width: 80vw;
+  margin-left: 10vw;
+}
+.Progress-Bar {
+  position: relative;
+  width: 80%;
+  margin-left: 10%;
+  height: 10px;
+  border: 2px solid var(--yellow);
+  border-radius: 25px;
+  margin-bottom: 40px;
+}
+.Inner-Bar {
+  position: relative;
+  height: 10px;
+  border-radius: 25px;
+  background-color: var(--yellow);
+}
+.Progress-Container { 
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.Round {
+  width: 40px;
+  height: 40px;
+  margin: 10px;
+  text-align: center;
+  align-content: center;
+  border: 2px solid var(--gray);
+  color: var(--gray);
+  opacity: 50%;
+  border-radius: 20px;
+  user-select: none
+}
+.Round-Complete {
+  width: 40px;
+  height: 40px;
+  margin: 10px;
+  text-align: center;
+  align-content: center;
+  border: 2px solid var(--green);
+  color: var(--green);
+  background-color: var(--green-clear);
+  border-radius: 20px;
+  user-select: none
 }
 .Cards-Container {
   display: flex;
@@ -13,6 +81,116 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid black;
+  border: 2px solid var(--gray);
+  color: var(--gray);
   cursor: pointer;
+  border-radius: 20px;
+  user-select: none;
+  font-size: 30px;
 }
+.Card:hover {
+  background-color: var(--gray-clear)
+}
+.Actions-Container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.Undo-Button {
+  width: 80px;
+  height: 80px;
+  margin: 30px;
+  text-align: center;
+  align-content: center;
+  border: 2px solid var(--red);
+  color: var(--red);
+  cursor: pointer;
+  border-radius: 20px;
+  user-select: none
+}
+.Undo-Button:hover {
+  background-color: var(--red-clear);
+}
+.Refresh-Button {
+  width: 80px;
+  height: 80px;
+  margin: 30px;
+  text-align: center;
+  align-content: center;
+  border: 2px solid var(--yellow);
+  color: var(--yellow);
+  cursor: pointer;
+  border-radius: 20px;
+  user-select: none
+}
+.Refresh-Button:hover {
+  background-color: var(--yellow-clear);
+}
+.Values-Wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.Values-Header {
+  color: var(--gray);
+}
+.Values-List {
+  color: var(--white);
+  font-size: 30px;
+}
+
+ol li { 
+  animation-name: fade-in; 
+  animation-duration: 4s; 
+  animation-fill-mode: forwards; 
+} 
+
+ol {
+  animation-name: slide-in;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+ol li:nth-child(1) { 
+  animation-delay: 0; 
+} 
+
+ol li:nth-child(2) { 
+  animation-delay: 0.2s; 
+} 
+
+ol li:nth-child(3) { 
+  animation-delay: 0.4s; 
+} 
+
+ol li:nth-child(4) { 
+  animation-delay: 0.6s; 
+} 
+
+ol li:nth-child(5) { 
+  animation-delay: 0.8s; 
+} 
+
+ol li:nth-child(6) { 
+  animation-delay: 1.0s; 
+} 
+
+ol li:nth-child(7) { 
+  animation-delay: 1.2s; 
+} 
+
+@keyframes fade-in { 
+  from { 
+    color: var(--white)
+  } 
+
+  to { 
+    color: var(--gray);
+  } 
+} 
+
+@keyframes slide-in { 
+  from { 
+    margin-right: 100px
+  } 
+} 

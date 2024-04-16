@@ -1,29 +1,135 @@
 import './App.css';
+import { useState } from 'react';
+import { values } from './values';
 
-const values: Array<string> = ["left", "right"]
+var currentValues: string[] = values;
+var totalValuesInRound: number = values.length;
+var nextValues: string[] = [];
+var unselectedValues: string[] = [];
+var round: number = 1;
 
+const retrieveValues = () => {
+  for (let i = currentValues.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [currentValues[i], currentValues[j]] = [currentValues[j], currentValues[i]];
+  }
+  if (currentValues.length > 1) {
+    let ret: string[] = [currentValues[0], currentValues[1]];
+    currentValues = currentValues.splice(2);
+    return ret;
+  }
+  // special case when there are 15 options and we need 7 left for final values
+  else {
+    let ret: string[] = [currentValues[0], nextValues[0]];
+    currentValues = currentValues.splice(1);
+    nextValues = nextValues.splice(1);
+    return ret;
+  }
+}
+
+let initialValues = retrieveValues()
 function App() {
+  const [currentChoices, setCurrentChoices] = useState(initialValues);
+  const [foundValues, setFoundValues] = useState(false);
+
+  const refreshCurrentChoices = () => {
+    currentValues.push(currentChoices[0], currentChoices[1]);
+    let nextSelection = retrieveValues();
+    setCurrentChoices(nextSelection);
+    return
+  }
+
+  const undoSelection = () => {
+    if (nextValues.length === 0) {
+      console.log('cannot undo');
+      return
+    }
+    let prevSelected: string = nextValues.pop() as string
+    let prevUnselected: string = unselectedValues.pop() as string
+    console.log(currentValues.length);
+    currentValues.push(currentChoices[0], currentChoices[1], prevSelected, prevUnselected);
+    let nextSelection = retrieveValues();
+    setCurrentChoices(nextSelection);
+    return
+  }
+
+  const updateSelections = (selectedValue: string) => {
+    nextValues.push(selectedValue);
+    if (selectedValue === currentChoices[0]) {
+      unselectedValues.push(currentChoices[1])
+    } else {
+      unselectedValues.push(currentChoices[0])
+    }
+    if (currentValues.length === 0) {
+      if (nextValues.length === 7) {
+        setFoundValues(true);
+        return
+      } else {
+        currentValues = nextValues;
+        round += 1;
+        totalValuesInRound = currentValues.length;
+        nextValues = [];
+        unselectedValues = [];
+      }
+    }
+    let nextSelection = retrieveValues(); 
+    setCurrentChoices(nextSelection);
+    return
+  }
+  console.log(currentValues.length);
+  var percentageDone = 1 - (currentValues.length / totalValuesInRound);
+  if (foundValues) {
+    return (
+      <div className="App">
+        <div className="Values-Wrapper">
+          <ol className="Values-List">
+            {
+              nextValues.map((value) => {
+                return (
+                  <li key="value">{value}</li>
+                )
+              })
+            }
+          </ol>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="App">
+      <div className="Progress-Wrapper">
+        <div className="Progress-Container">
+          <div className={round > 1 ? "Round-Complete" : "Round"} style={{ opacity: round >= 1 ? "100%" : "50%"}}>1</div>
+          <div className={round > 2 ? "Round-Complete" : "Round"} style={{ opacity: round >= 2 ? "100%" : "50%"}}>2</div>
+          <div className={round > 3 ? "Round-Complete" : "Round"} style={{ opacity: round >= 3 ? "100%" : "50%"}}>3</div>
+          <div className={round > 4 ? "Round-Complete" : "Round"} style={{ opacity: round >= 4 ? "100%" : "50%"}}>4</div>
+          <div className={round > 5 ? "Round-Complete" : "Round"} style={{ opacity: round >= 5 ? "100%" : "50%"}}>5</div>
+        </div>
+        <div className="Progress-Bar">
+          <div className="Inner-Bar" style={{width: `${percentageDone*100}%`}}></div>
+        </div>
+      </div>
       <div className="Cards-Container">
         {
-          values.map((value) => {
-            return(
-              <Card name={value} />
+          currentChoices.map((value: any) => {
+            return (
+              <div
+                className="Card"
+                onClick={() => updateSelections(value)}
+                key={value}
+              >
+                <p className="Card-Body">{value}</p>
+              </div>
             )
           })
         }
       </div>
+      <div className="Actions-Container">
+        <div className="Undo-Button" onClick={undoSelection}>Undo</div>
+        <div className="Refresh-Button" onClick={refreshCurrentChoices}>Refresh</div>
+      </div>
     </div>
   );
-}
-
-function Card(props: { name: string }) {
-  return (
-    <div className="Card" onClick={() => console.log(`${props.name} pressed`)}>
-      <p className="Card-Body">{props.name}</p>
-    </div>
-  )
 }
 
 export default App;
