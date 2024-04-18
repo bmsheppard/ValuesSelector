@@ -38,9 +38,6 @@ body {
   color: var(--white);
 }
 .Dark-Button {
-  position: absolute;
-  left: 15px;
-  top: 15px;
   display: flex;
   width: 100px;
   height: 40px;
@@ -56,9 +53,6 @@ body {
   background-color: var(--white-clear);
 }
 .Light-Button {
-  position: absolute;
-  left: 15px;
-  top: 15px;
   display: flex;
   width: 100px;
   height: 40px;
@@ -72,6 +66,36 @@ body {
 }
 .Light-Button:hover {
   background-color: var(--gray-clear);
+}
+.Dark-Edit-Button {
+  display: flex;
+  width: 100px;
+  height: 40px;
+  border: 2px solid var(--light-red);
+  border-radius: 12px;
+  justify-content: center;
+  align-items: center;
+  color: var(--light-red);
+  cursor: pointer;
+  user-select: none;
+}
+.Dark-Edit-Button:hover {
+  background-color: var(--red-clear);
+}
+.Light-Edit-Button {
+  display: flex;
+  width: 100px;
+  height: 40px;
+  border: 2px solid var(--red);
+  border-radius: 12px;
+  justify-content: center;
+  align-items: center;
+  color: var(--red);
+  cursor: pointer;
+  user-select: none
+}
+.Light-Edit-Button:hover {
+  background-color: var(--red-clear);
 }
 .Progress-Wrapper {
   width: 80vw;
@@ -250,46 +274,82 @@ body {
   animation-duration: 0.5s;
   animation-direction: reverse;
 }
-.List { 
+.List-Wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0 10px 0;
+}
+.List {
   animation-name: fade-in; 
   animation-duration: 2s;
   animation-fill-mode: forwards;
 } 
-
+.Fade-In {
+  animation-name: fade-in-1;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+.Fade-Out {
+  animation-name: fade-in-1;
+  animation-duration: 2s;
+  animation-direction: reverse;
+}
 .List-Dark { 
   animation-name: fade-in; 
   animation-duration: 2s;
   animation-direction: reverse;
-  animation-fill-mode: backwards;
 } 
-
+.Value {
+  animation-name: fade-in-1;
+  animation-duration: 2s;
+  width: fit-content;
+  display: flex;
+  padding: 10px;
+  font-size: 30px;
+  
+  cursor: pointer;
+  user-select: none;
+}
+.Light:hover {
+  outline: 2px solid var(--gray);
+  border-radius: 15px;
+}
+.Light {
+  color: var(--gray);
+}
+.Dark:hover {
+  outline: 2px solid var(--white);
+  border-radius: 15px;
+}
+.Dark {
+  color: var(--white);
+}
 ol {
-  animation-name: slide-in;
   animation-duration: 2s;
   animation-fill-mode: forwards;
 }
 
-ol li:nth-child(1) { 
+li:nth-child(1) { 
   animation-delay: 0; 
 } 
 
-ol li:nth-child(2) { 
+li:nth-child(2) { 
   animation-delay: 0.2s; 
 } 
 
-ol li:nth-child(3) { 
+li:nth-child(3) { 
   animation-delay: 0.4s; 
 } 
 
-ol li:nth-child(4) { 
+li:nth-child(4) { 
   animation-delay: 0.6s; 
 } 
 
-ol li:nth-child(5) { 
+li:nth-child(5) { 
   animation-delay: 0.8s; 
 } 
 
-ol li:nth-child(6) { 
+li:nth-child(6) { 
   animation-delay: 1.0s; 
 } 
 
@@ -306,8 +366,13 @@ ol li:nth-child(7) {
     color: var(--black);
   } 
 } 
-@keyframes slide-in { 
+
+@keyframes fade-in-1 { 
   from { 
-    margin-right: 100px
+    opacity: 0;
+  } 
+
+  to { 
+    opacity: 1;
   } 
 } 
